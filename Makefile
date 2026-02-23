@@ -36,6 +36,7 @@ build_cpp:
 
 .PHONY: install
 install:
+	uv sync
 	uv pip install -e .
 
 .PHONY: tests
