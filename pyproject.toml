@@ -22,7 +22,7 @@ nifty_common = { workspace = true }
 [tool.hatch.build.targets.wheel]
 packages = ["src/nifty_common"]
 
-[tool.hatch.build.targets.wheel.hooks.custom]
+# [tool.hatch.build.targets.wheel.hooks.custom]
 
 
 
@@ -52,5 +52,7 @@ convention = "google"
 
 [dependency-groups]
 dev = [
+    "cmake>=4.2.1",
     "pre-commit>=4.5.1",
+    "pytest>=9.0.2",
 ]
