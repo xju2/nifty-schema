@@ -15,11 +15,11 @@ protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS
     APPEND_PATH "${PROTO_ROOT}"
     PROTOS "${PROTO_FILE}")
 
-add_library(nifty_schema_cpp ${PROTO_SRCS} ${PROTO_HDRS})
+add_library(nifty_schema ${PROTO_SRCS} ${PROTO_HDRS})
 
 # Allow users to #include "nifty_common/v1/nifty_common.pb.h"
-target_include_directories(nifty_schema_cpp PUBLIC
+target_include_directories(nifty_schema PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
     $<INSTALL_INTERFACE:include>)
 
-target_link_libraries(nifty_schema_cpp PUBLIC protobuf::libprotobuf)
+target_link_libraries(nifty_schema PUBLIC protobuf::libprotobuf)

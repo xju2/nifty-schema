@@ -34,6 +34,10 @@ build_cpp:
 	cmake -B build -S .
 	cmake --build build --config Release
 
-.PHONY: build_py
-build_py:
-	uv build
+.PHONY: install
+install:
+	uv pip install -e .
+
+.PHONY: tests
+tests:
+	uv run pytest
