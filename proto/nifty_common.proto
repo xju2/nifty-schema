@@ -49,8 +49,10 @@ message GraphConstants {
 }
 
 message BoardState {
-  string version = 1;       // Schema versioning for backward compatibility
+  string version = 1;       // Schema versioning (e.g., "0.1.0")
   string creator_id = 2;   // e.g., "Simulation_Group_A"
+  uint64 sequence_number = 9;  // added to track simulation step/ticks
+  double timestamp = 10;       // simulation time in seconds
 
   // Nodes: shape [N, 2] -> Col 0: Packet, Col 1: Hops
   NDArray nodes = 3;

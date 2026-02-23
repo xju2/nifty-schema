@@ -1,14 +1,26 @@
 [project]
-name = "nifty-common-schema"
+name = "nifty-common"
 version = "0.1.0"
 description = "Universal board state contract for Nifty teams"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "numpy>=2.4.2",
+    "protobuf>=6.33.5",
+]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.uv.workspace]
+members = ["nifty_common"]
+
+[tool.uv.sources]
+nifty_common = { workspace = true }
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/nifty_common"]
 
 [tool.ruff]
 line-length = 100
@@ -33,3 +45,9 @@ isort = { combine-as-imports = true, known-first-party = ["agents"] }
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.5.1",
+]
+
