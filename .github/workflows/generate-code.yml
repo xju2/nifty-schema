@@ -1,0 +1,17 @@
+name: Generate Proto Code
+on:
+  push:
+    paths: ["proto/**"]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Protoc
+        run: make install-protoc
+      - name: Generate Python Code
+        run: protoc --proto_path=proto --python_out=src/nifty_common proto/nifty_common.proto
+      - name: Verify C++ Build
+        run: |
+          mkdir build && cd build
+          cmake .. && make

@@ -22,6 +22,10 @@ nifty_common = { workspace = true }
 [tool.hatch.build.targets.wheel]
 packages = ["src/nifty_common"]
 
+[tool.hatch.build.targets.wheel.hooks.custom]
+
+
+
 [tool.ruff]
 line-length = 100
 target-version = "py314"
@@ -50,4 +54,3 @@ convention = "google"
 dev = [
     "pre-commit>=4.5.1",
 ]
-
