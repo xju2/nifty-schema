@@ -31,7 +31,7 @@ clean-protoc:
 
 .PHONY: build_cpp
 build_cpp:
-	cmake -B build -S .
+	cmake -B build -S . -DCMAKE_PREFIX_PATH=${BIN_DIR}
 	cmake --build build --config Release
 
 .PHONY: install
