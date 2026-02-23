@@ -27,3 +27,13 @@ install-protoc:
 clean-protoc:
 	rm -f $(BIN_DIR)/protoc
 	rm -rf $(INSTALL_DIR)/include/google/protobuf
+
+
+.PHONY: build_cpp
+build_cpp:
+	cmake -B build -S .
+	cmake --build build --config Release
+
+.PHONY: build_py
+build_py:
+	uv build
