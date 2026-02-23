@@ -211,3 +211,5 @@ __marimo__/
 *_pb2.pyi
 *.pb.h
 *.pb.cc
+build/
+.cache/
