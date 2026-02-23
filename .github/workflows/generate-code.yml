@@ -7,6 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # 1. Install uv and set up the Python environment
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          # Automatically use the version in .python-version or pyproject.toml
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
       - name: Install Protoc
         run: make install-protoc
       - name: Install the package
