@@ -1,0 +1,11 @@
+[project]
+name = "nifty-common-schema"
+version = "0.1.0"
+description = "Universal board state contract for Nifty teams"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

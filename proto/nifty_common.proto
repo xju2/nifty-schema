@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package nifty_common.v1;
+
+message NDArray {
+  enum DataType {
+    FLOAT32 = 0;
+    FLOAT64 = 1;
+    INT64 = 2;
+    INT32 = 3;
+    UINT8 = 4;
+  }
+  DataType dtype = 1;
+  repeated int64 shape = 2;
+  bytes raw_data = 3;
+}
+
+// Fixed Index Definitions.
+// Every NDArray MUST conform to these column indices.
+message GraphConstants {
+  enum NODEKIND {
+    NODE_KIND_UNKNOWN = 0;
+    NODE_KIND_SOURCE = 1;  // Normal cell holding packets
+    NODE_KIND_SINK = 2;    // Output ROOT node
+  }
+
+  enum NodeColumn {
+    NODE_ID = 0;      // Node ID
+    NODE_KIND = 1;    // Node kind
+    NODE_PACKET = 2;  // Count of packets
+    NODE_HOPS = 3;    // Hop count
+    NUM_NODE_FEATURES = 4;
+    // Future features must be appended here
+  }
+
+  enum EdgeColumn {
+    EDGE_CAPACITY = 0;   // Maximum number of packets that can traverse this edge per time step
+    EDGE_CONGESTION = 1; // Congestion level (0.0 - 1.0)
+    NUM_EDGE_FEATURES = 2;
+    // Future features must be appended here
+  }
+
+  enum GlobalColumn {
+    MAX_NEW_PIECES_ALLOWED_PER_CELL = 0;    // Current simulation time in seconds
+    CELL_OVERFLOW_ALLOWED = 1;              // Threshold for cell overflow
+    ZERO_MOVE_ALLOWED = 2;                  // Flag for zero-move allowance for all pieces.
+    // Future features must be appended here
+  }
+}
+
+message BoardState {
+  string version = 1;       // Schema versioning for backward compatibility
+  string creator_id = 2;   // e.g., "Simulation_Group_A"
+
+  // Nodes: shape [N, 2] -> Col 0: Packet, Col 1: Hops
+  NDArray nodes = 3;
+
+  NDArray edge_index = 4;    // Shape: [2, E] (Source, Target)
+
+  // Edge Attributes: shape [E, 1] -> Col 0: Congestion
+  NDArray edge_attributes = 5;
+
+  NDArray global_context = 6;  // Shape: [D_global]
+
+  // Extensibility
+  map<string, NDArray> auxiliary_data = 7; // For custom team-specific outputs
+  map<string, string> metadata = 8;        // Timestamps, simulation parameters, etc.
+}
