@@ -5,6 +5,26 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(Protobuf REQUIRED)
 
+# 2. If not found, download and build it automatically
+if(NOT Protobuf_FOUND)
+    message(STATUS "Protobuf not found. Downloading and building from source...")
+    include(FetchContent)
+    FetchContent_Declare(
+        protobuf
+        GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
+        GIT_TAG        v25.1  # Matches your intended versioning
+        GIT_SUBMODULES ""     # Faster download
+    )
+    set(protobuf_BUILD_TESTS OFF CACHE BOOL "Disable tests" FORCE)
+    set(protobuf_INSTALL OFF CACHE BOOL "Disable install" FORCE)
+
+    FetchContent_MakeAvailable(protobuf)
+
+    # Map the FetchContent targets to the standard names used by find_package
+    add_library(protobuf::libprotobuf ALIAS libprotobuf)
+    set(Protobuf_PROTOC_EXECUTABLE protoc)
+endif()
+
 # Define the proto source
 set(PROTO_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/proto")
 set(PROTO_FILE "${PROTO_ROOT}/nifty_common/v1/nifty_common.proto")
