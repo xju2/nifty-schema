@@ -3,7 +3,7 @@ project(nifty_common_schema LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-find_package(Protobuf REQUIRED)
+find_package(Protobuf QUIET)
 
 # 2. If not found, download and build it automatically
 if(NOT Protobuf_FOUND)
