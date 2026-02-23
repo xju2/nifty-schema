@@ -12,7 +12,7 @@ if(NOT Protobuf_FOUND)
     FetchContent_Declare(
         protobuf
         GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
-        GIT_TAG        v25.1  # Matches your intended versioning
+        GIT_TAG        v33.5  # Matches your intended versioning
         GIT_SUBMODULES ""     # Faster download
     )
     set(protobuf_BUILD_TESTS OFF CACHE BOOL "Disable tests" FORCE)
