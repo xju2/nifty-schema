@@ -5,14 +5,29 @@ NIFTY Board Game Schema
 
 ## Instructions
 
-### For C++ Users
+### Run C++ examples
 
-1. Clone the repository and navigate to the project directory.
-2. Run the code generation script to generate the C++ classes from the protobuf definitions:
+Build the repository and C++ examples:
 ```bash
 make build_cpp
+cmake --build build --target example_create_cpp example_read_cpp
 ```
-3. Include the generated header files in your C++ project and link against the generated source files
-```cpp
-#include "nifty_common.pb.h"
+
+Create and read a sample `BoardState` file:
+```bash
+./build/example_create_cpp examples/nifty_common.bin
+./build/example_read_cpp examples/nifty_common.bin
+```
+
+### Run Python examples
+
+Install Python dependencies and the local package:
+```bash
+make install
+```
+
+Create and read the same `BoardState` file in Python:
+```bash
+uv run python examples/create.py examples/nifty_common.bin
+uv run python examples/read.py examples/nifty_common.bin
 ```

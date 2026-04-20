@@ -43,3 +43,9 @@ target_include_directories(nifty_schema PUBLIC
     $<INSTALL_INTERFACE:include>)
 
 target_link_libraries(nifty_schema PUBLIC protobuf::libprotobuf)
+
+add_executable(example_create_cpp examples/create.cxx)
+target_link_libraries(example_create_cpp PRIVATE nifty_schema)
+
+add_executable(example_read_cpp examples/read.cxx)
+target_link_libraries(example_read_cpp PRIVATE nifty_schema)
