@@ -44,8 +44,8 @@ message GraphConstants {
   }
 
   enum GlobalColumn {
-    MAX_NEW_PIECES_ALLOWED_PER_CELL = 0;    // Current simulation time in seconds
-    CELL_OVERFLOW_ALLOWED = 1;              // Threshold for cell overflow
+    MAX_NEW_PIECES_ALLOWED_PER_CELL = 0;    // Threshold for cell overflow
+    CELL_OVERFLOW_ALLOWED = 1;              // Flag for allowing overflow (1 if allowed, 0 if not)
     ZERO_MOVE_ALLOWED = 2;                  // Flag for zero-move allowance for all pieces.
     NUM_GLOBAL_FEATURES = 3;
     // Future features must be appended here
